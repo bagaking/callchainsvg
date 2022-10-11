@@ -12,5 +12,5 @@ coverage/
 #example/
 mock/
 
-*.svg
+/*.svg
 #link_data.json

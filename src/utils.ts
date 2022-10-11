@@ -1,5 +1,5 @@
-import {Data} from "./algorithm";
 import * as fs from "fs";
+import {Data} from "./ttype";
 
 export const defaultDataFilePath = "./link_data.json"
 

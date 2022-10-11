@@ -91,7 +91,7 @@ export default function deal(mode: ChartsMode | string = ChartsMode.NONE) {
     if(mode != ChartsMode.FORCE) {
         drawCharts("callchaintest", makeOption("Call Chain", graph), {...windowSize})
     } else {
-        drawCharts("callchaintest", makeOption("Call Chain", graph), { width: 4096, height: 4096 }) // for force graph
+        drawCharts("callchaintest", makeOption("Call Chain", graph), { width: 4096, height: 2000 }) // for force graph
     }
 }
 
