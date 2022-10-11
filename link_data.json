@@ -1,0 +1,390 @@
+{
+  "service": {
+    "core_svr": {
+      "Name": "core_svr",
+      "Meta": {
+        "type": "rpc",
+        "domain": "L0"
+      }
+    },
+    "basement_svr": {
+      "Name": "basement_svr",
+      "Meta": {
+        "type": "rpc",
+        "domain": "L0"
+      }
+    },
+    "gulp_svr": {
+      "Name": "gulp_svr",
+      "Meta": {
+        "type": "rpc",
+        "domain": "L0"
+      }
+    },
+    "ext_svr": {
+      "Name": "ext_svr",
+      "Meta": {
+        "type": "rpc",
+        "domain": "L0"
+      }
+    },
+    "msg_channel": {
+      "Name": "msg_channel",
+      "Meta": {
+        "type": "rpc",
+        "domain": "L0"
+      }
+    },
+    "facade_svr": {
+      "Name": "facade_svr",
+      "Meta": {
+        "type": "other",
+        "domain": "L1"
+      }
+    },
+    "control_panel": {
+      "Name": "control_panel",
+      "Meta": {
+        "type": "rpc",
+        "domain": "L1"
+      }
+    },
+    "device_svr": {
+      "Name": "device_svr",
+      "Meta": {
+        "type": "rpc",
+        "domain": "L1"
+      }
+    },
+    "device_gw": {
+      "Name": "device_gw",
+      "Meta": {
+        "type": "rpc",
+        "domain": "L1"
+      }
+    },
+    "logic_facade": {
+      "Name": "logic_facade",
+      "Meta": {
+        "type": "rpc",
+        "domain": "L1"
+      }
+    },
+    "session_svr": {
+      "Name": "session_svr",
+      "Meta": {
+        "type": "rpc",
+        "domain": "L2"
+      }
+    },
+    "config_center": {
+      "Name": "config_center",
+      "Meta": {
+        "type": "rpc",
+        "domain": "L2"
+      }
+    },
+    "gray_scale_center": {
+      "Name": "gray_scale_center",
+      "Meta": {
+        "type": "rpc",
+        "domain": "L2"
+      }
+    },
+    "redis": {
+      "Name": "redis",
+      "Meta": {
+        "type": "storage",
+        "domain": "L0"
+      }
+    }
+  },
+  "relation": [
+    {
+      "From": {
+        "Service": "core_svr",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "gulp_svr",
+        "Method": "MPut"
+      },
+      "Meta": {
+        "relation": "strong"
+      }
+    },
+    {
+      "From": {
+        "Service": "facade_svr",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "device_svr",
+        "Method": "MGetDeviceAndRegion"
+      },
+      "Meta": {
+        "relation": "strong"
+      }
+    },
+    {
+      "From": {
+        "Service": "facade_svr",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "control_panel",
+        "Method": "RefreshUserState"
+      },
+      "Meta": {
+        "relation": "strong"
+      }
+    },
+    {
+      "From": {
+        "Service": "facade_svr",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "config_center",
+        "Method": "MGet"
+      },
+      "Meta": {
+        "relation": "strong"
+      }
+    },
+    {
+      "From": {
+        "Service": "msg_channel",
+        "Method": "Pull"
+      },
+      "To": {
+        "Service": "core_svr",
+        "Method": "Handler"
+      },
+      "Meta": {
+        "relation": "week"
+      }
+    },
+    {
+      "From": {
+        "Service": "core_svr",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "gray_scale_center",
+        "Method": "Ratio"
+      },
+      "Meta": {
+        "relation": "week"
+      }
+    },
+    {
+      "From": {
+        "Service": "core_svr",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "config_center",
+        "Method": "Read"
+      },
+      "Meta": {
+        "relation": "week"
+      }
+    },
+    {
+      "From": {
+        "Service": "core_svr",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "redis",
+        "Method": "hmset"
+      },
+      "Meta": {
+        "relation": "week"
+      }
+    },
+    {
+      "From": {
+        "Service": "logic_facade",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "basement_svr",
+        "Method": "QueryInfo"
+      },
+      "Meta": {
+        "relation": "week"
+      }
+    },
+    {
+      "From": {
+        "Service": "core_svr",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "session_svr",
+        "Method": "MGetSession"
+      },
+      "Meta": {
+        "relation": "week"
+      }
+    },
+    {
+      "From": {
+        "Service": "core_svr",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "config_center",
+        "Method": "MGet"
+      },
+      "Meta": {
+        "relation": "week"
+      }
+    },
+    {
+      "From": {
+        "Service": "core_svr",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "ext_svr",
+        "Method": "GetRolesByMeetingIDAndScne"
+      },
+      "Meta": {
+        "relation": "week"
+      }
+    },
+    {
+      "From": {
+        "Service": "facade_svr",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "redis",
+        "Method": "get"
+      },
+      "Meta": {
+        "relation": "week"
+      }
+    },
+    {
+      "From": {
+        "Service": "logic_facade",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "config_center",
+        "Method": "MGet"
+      },
+      "Meta": {
+        "relation": "week"
+      }
+    },
+    {
+      "From": {
+        "Service": "msg_channel",
+        "Method": "Pull"
+      },
+      "To": {
+        "Service": "logic_facade",
+        "Method": "Handler"
+      },
+      "Meta": {
+        "relation": "week"
+      }
+    },
+    {
+      "From": {
+        "Service": "core_svr",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "gray_scale_center",
+        "Method": "Ratio"
+      },
+      "Meta": {
+        "relation": "week"
+      }
+    },
+    {
+      "From": {
+        "Service": "facade_svr",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "device_gw",
+        "Method": "Handler"
+      },
+      "Meta": {
+        "relation": "strong"
+      }
+    },
+    {
+      "From": {
+        "Service": "logic_facade",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "config_center",
+        "Method": "GetMeetingMeta"
+      },
+      "Meta": {
+        "relation": "strong"
+      }
+    },
+    {
+      "From": {
+        "Service": "msg_channel",
+        "Method": "Pull"
+      },
+      "To": {
+        "Service": "facade_svr",
+        "Method": "Handler"
+      },
+      "Meta": {
+        "relation": "strong"
+      }
+    },
+    {
+      "From": {
+        "Service": "core_svr",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "redis",
+        "Method": "expire"
+      },
+      "Meta": {
+        "relation": "strong"
+      }
+    },
+    {
+      "From": {
+        "Service": "core_svr",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "redis",
+        "Method": "get"
+      },
+      "Meta": {
+        "relation": "strong"
+      }
+    },
+    {
+      "From": {
+        "Service": "device_gw",
+        "Method": "Handler"
+      },
+      "To": {
+        "Service": "redis",
+        "Method": "scan"
+      },
+      "Meta": {
+        "relation": "strong"
+      }
+    }
+  ]
+}

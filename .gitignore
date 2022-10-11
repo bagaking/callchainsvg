@@ -1,0 +1,16 @@
+node_modules/
+echarts_src/
+.rpt2_cache
+
+.vscode
+.cache
+.idea
+
+dist/
+build/
+coverage/
+#example/
+mock/
+
+*.svg
+#link_data.json
